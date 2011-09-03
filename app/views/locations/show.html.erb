@@ -8,6 +8,12 @@
   <%=h @location.description %>
 </p>
 
+<p>
+  <b>Exits:</b>
+  <% for exit in @location.exits do %>
+  	<div><%= link_to exit.title, location_url(exit.destination_id) %></div>
+  <% end %>
+</p>
 
 <%= link_to 'Edit', edit_location_path(@location) %> |
 <%= link_to 'Back', locations_path %>
