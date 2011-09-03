@@ -1,0 +1,169 @@
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mROLLBACK[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mROLLBACK[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM `locations` [0m
+
+
+Processing LocationsController#create (for 0.0.0.0 at 2011-09-03 12:01:54) [POST]
+  Parameters: {"location"=>{}}
+  [4;35;1mSQL (0.1ms)[0m   [0mSAVEPOINT active_record_1[0m
+  [4;36;1mLocation Create (0.2ms)[0m   [0;1mINSERT INTO `locations` (`created_at`, `title`, `updated_at`, `description`) VALUES('2011-09-03 19:01:54', NULL, '2011-09-03 19:01:54', NULL)[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/locations/980190963
+Completed in 4ms (DB: 5) | 302 Found [http://test.host/locations?]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM `locations` [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM `locations` [0m
+  [4;36;1mLocation Load (0.2ms)[0m   [0;1mSELECT * FROM `locations` WHERE (`locations`.`id` = 980190962) [0m
+
+
+Processing LocationsController#destroy (for 0.0.0.0 at 2011-09-03 12:01:54) [DELETE]
+  Parameters: {"id"=>"980190962"}
+  [4;35;1mLocation Load (0.1ms)[0m   [0mSELECT * FROM `locations` WHERE (`locations`.`id` = 980190962) [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mLocation Destroy (0.1ms)[0m   [0mDELETE FROM `locations` WHERE `id` = 980190962[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/locations
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/locations/980190962]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM `locations` [0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mROLLBACK[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLocation Load (0.1ms)[0m   [0;1mSELECT * FROM `locations` WHERE (`locations`.`id` = 980190962) [0m
+
+
+Processing LocationsController#edit (for 0.0.0.0 at 2011-09-03 12:01:54) [GET]
+  Parameters: {"id"=>"980190962"}
+  [4;35;1mLocation Load (0.1ms)[0m   [0mSELECT * FROM `locations` WHERE (`locations`.`id` = 980190962) [0m
+Rendering template within layouts/locations
+Rendering locations/edit
+Completed in 4ms (View: 4, DB: 1) | 200 OK [http://test.host/locations/980190962/edit]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mROLLBACK[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+
+
+Processing LocationsController#index (for 0.0.0.0 at 2011-09-03 12:01:54) [GET]
+  [4;36;1mLocation Load (0.2ms)[0m   [0;1mSELECT * FROM `locations` [0m
+Rendering template within layouts/locations
+Rendering locations/index
+Completed in 4ms (View: 3, DB: 0) | 200 OK [http://test.host/locations]
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+
+
+Processing LocationsController#new (for 0.0.0.0 at 2011-09-03 12:01:54) [GET]
+Rendering template within layouts/locations
+Rendering locations/new
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/locations/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLocation Load (0.1ms)[0m   [0mSELECT * FROM `locations` WHERE (`locations`.`id` = 980190962) [0m
+
+
+Processing LocationsController#show (for 0.0.0.0 at 2011-09-03 12:01:54) [GET]
+  Parameters: {"id"=>"980190962"}
+  [4;36;1mLocation Load (0.1ms)[0m   [0;1mSELECT * FROM `locations` WHERE (`locations`.`id` = 980190962) [0m
+Rendering template within layouts/locations
+Rendering locations/show
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/locations/980190962]
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLocation Load (0.1ms)[0m   [0mSELECT * FROM `locations` WHERE (`locations`.`id` = 980190962) [0m
+
+
+Processing LocationsController#update (for 0.0.0.0 at 2011-09-03 12:01:54) [PUT]
+  Parameters: {"location"=>{}, "id"=>"980190962"}
+  [4;36;1mLocation Load (0.2ms)[0m   [0;1mSELECT * FROM `locations` WHERE (`locations`.`id` = 980190962) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/locations/980190962
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/locations/980190962?]
+  [4;35;1mSQL (0.0ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM `passages` [0m
+
+
+Processing PassagesController#create (for 0.0.0.0 at 2011-09-03 12:01:54) [POST]
+  Parameters: {"passage"=>{}}
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSAVEPOINT active_record_1[0m
+  [4;35;1mPassage Create (0.1ms)[0m   [0mINSERT INTO `passages` (`created_at`, `title`, `updated_at`, `destination_id`, `source_id`) VALUES('2011-09-03 19:01:54', NULL, '2011-09-03 19:01:54', NULL, NULL)[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/passages/980190963
+Completed in 3ms (DB: 0) | 302 Found [http://test.host/passages?]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM `passages` [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mROLLBACK[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM `passages` [0m
+  [4;35;1mPassage Load (0.1ms)[0m   [0mSELECT * FROM `passages` WHERE (`passages`.`id` = 980190962) [0m
+
+
+Processing PassagesController#destroy (for 0.0.0.0 at 2011-09-03 12:01:54) [DELETE]
+  Parameters: {"id"=>"980190962"}
+  [4;36;1mPassage Load (0.1ms)[0m   [0;1mSELECT * FROM `passages` WHERE (`passages`.`id` = 980190962) [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSAVEPOINT active_record_1[0m
+  [4;36;1mlocations_passages Columns (0.0ms)[0m   [0;1mMysql::Error: Table 'gitcheegumee_test.locations_passages' doesn't exist: SHOW FIELDS FROM `locations_passages`[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK TO SAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mROLLBACK[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mPassage Load (0.2ms)[0m   [0;1mSELECT * FROM `passages` WHERE (`passages`.`id` = 980190962) [0m
+
+
+Processing PassagesController#edit (for 0.0.0.0 at 2011-09-03 12:01:54) [GET]
+  Parameters: {"id"=>"980190962"}
+  [4;35;1mPassage Load (0.1ms)[0m   [0mSELECT * FROM `passages` WHERE (`passages`.`id` = 980190962) [0m
+Rendering template within layouts/passages
+Rendering passages/edit
+Completed in 4ms (View: 3, DB: 1) | 200 OK [http://test.host/passages/980190962/edit]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mROLLBACK[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+
+
+Processing PassagesController#index (for 0.0.0.0 at 2011-09-03 12:01:54) [GET]
+  [4;36;1mPassage Load (0.1ms)[0m   [0;1mSELECT * FROM `passages` [0m
+Rendering template within layouts/passages
+Rendering passages/index
+Completed in 4ms (View: 3, DB: 0) | 200 OK [http://test.host/passages]
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+
+
+Processing PassagesController#new (for 0.0.0.0 at 2011-09-03 12:01:54) [GET]
+Rendering template within layouts/passages
+Rendering passages/new
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://test.host/passages/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mPassage Load (0.1ms)[0m   [0mSELECT * FROM `passages` WHERE (`passages`.`id` = 980190962) [0m
+
+
+Processing PassagesController#show (for 0.0.0.0 at 2011-09-03 12:01:54) [GET]
+  Parameters: {"id"=>"980190962"}
+  [4;36;1mPassage Load (0.1ms)[0m   [0;1mSELECT * FROM `passages` WHERE (`passages`.`id` = 980190962) [0m
+Rendering template within layouts/passages
+Rendering passages/show
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/passages/980190962]
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mPassage Load (0.1ms)[0m   [0mSELECT * FROM `passages` WHERE (`passages`.`id` = 980190962) [0m
+
+
+Processing PassagesController#update (for 0.0.0.0 at 2011-09-03 12:01:54) [PUT]
+  Parameters: {"passage"=>{}, "id"=>"980190962"}
+  [4;36;1mPassage Load (0.1ms)[0m   [0;1mSELECT * FROM `passages` WHERE (`passages`.`id` = 980190962) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSAVEPOINT active_record_1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/passages/980190962
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/passages/980190962?]
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
