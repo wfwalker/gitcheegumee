@@ -8,12 +8,10 @@
     <%= f.text_field :title %>
   </p>
   <p>
-    <%= f.label :source_id %><br />
-    <%= f.text_field :source_id %>
+    <%= collection_select("passage", "source_id", Location.find(:all), :id, :title, {:prompt => true}) %>
   </p>
   <p>
-    <%= f.label :destination_id %><br />
-    <%= f.text_field :destination_id %>
+    <%= collection_select("passage", "destination_id", Location.find(:all), :id, :title, {:prompt => true}) %>
   </p>
   <p>
     <%= f.submit 'Update' %>
