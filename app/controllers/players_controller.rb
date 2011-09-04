@@ -32,7 +32,7 @@ class PlayersController < ApplicationController
       raise "Illegal move, player %d in location %d using passage with source id %d" % [@player.id, @player.location.id, @passage.source_id]
     end
 
-    render :action => 'show', :id => @player
+    redirect_to :action => 'show', :id => @player
   end
 
   # GET /players/new
