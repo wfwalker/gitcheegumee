@@ -9,6 +9,13 @@
 </p>
 
 <p>
+  <b>Players:</b>
+  <% for player in @location.players do %>
+  	<div><%= link_to player.name, player_url(player) %></div>
+  <% end %>
+</p>
+
+<p>
   <b>Exits:</b>
   <% for exit in @location.exits do %>
   	<div><%= link_to exit.title, location_url(exit.destination_id) %></div>

@@ -1,0 +1,19 @@
+<p>
+  <%=h @player.name %>
+</p>
+
+<hr />
+
+<p><%= @player.location.description %>.</p>
+
+<% otherLocalPlayers = @player.location.players.select { |player| player.id != @player.id } %>
+
+<% if otherLocalPlayers.length > 0 %>
+	<p><%= otherLocalPlayers.collect { |player| player.name }.join(', ') %> is here.<p>
+<% end %>
+
+<b>exits:</b>
+<% for passage in @player.location.exits do %>
+	<%= link_to passage.title, :controller => 'players', :action => 'move', :id => @player, :passage_id => passage %>
+<% end %>
+</p>

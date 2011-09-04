@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110903185723) do
+ActiveRecord::Schema.define(:version => 20110903214138) do
 
   create_table "locations", :force => true do |t|
     t.string   "title"
@@ -22,6 +22,14 @@ ActiveRecord::Schema.define(:version => 20110903185723) do
     t.string   "title"
     t.integer  "source_id"
     t.integer  "destination_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "players", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.integer  "location_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
