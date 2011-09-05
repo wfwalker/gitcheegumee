@@ -34,6 +34,7 @@ class PassagesController < ApplicationController
 
   # GET /passages/1/edit
   def edit
+    @locations = Location.find(:all)
     @passage = Passage.find(params[:id])
   end
 

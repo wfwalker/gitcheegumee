@@ -35,6 +35,36 @@ class PlayersController < ApplicationController
     redirect_to :action => 'show', :id => @player
   end
 
+  def take
+    @player = Player.find(params[:id])
+    @item = Item.find(params[:item_id])
+
+    if @player.location_id == @item.location_id then
+      @item.player_id = @player.id
+      @item.location_id = 0
+      @item.save
+    else
+      raise "Illegal move, player %d in location %d using passage with source id %d" % [@player.id, @player.location.id, @passage.source_id]
+    end
+
+    redirect_to :action => 'show', :id => @player
+  end
+
+  def drop
+    @player = Player.find(params[:id])
+    @item = Item.find(params[:item_id])
+
+    if @player.id == @item.player_id then
+      @item.player_id = 0
+      @item.location_id = @player.location_id
+      @item.save
+    else
+      raise "Illegal move, player %d in location %d using passage with source id %d" % [@player.id, @player.location.id, @passage.source_id]
+    end
+
+    redirect_to :action => 'show', :id => @player
+  end
+
   # GET /players/new
   # GET /players/new.xml
   def new
