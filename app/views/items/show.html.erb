@@ -1,0 +1,23 @@
+<p>
+  <b>Name:</b>
+  <%=h @item.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @item.description %>
+</p>
+
+<p>
+  <b>Location:</b>
+  <%=h @item.location_id %>
+</p>
+
+<p>
+  <b>Player:</b>
+  <%=h @item.player_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_item_path(@item) %> |
+<%= link_to 'Back', items_path %>
