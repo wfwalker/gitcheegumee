@@ -12,7 +12,16 @@
 	<p><%= otherLocalPlayers.collect { |player| player.name }.join(', ') %> is here.<p>
 <% end %>
 
-<b>exits:</b>
+<% for item in @player.location.items do %>
+	<div><%= link_to item.description, :controller => 'players', :action => 'take', :id => @player, :item_id => item %> is here</div>
+<% end %>
+
+<h3>inventory:</h3>
+<% for item in @player.items do %>
+	<div><%= link_to item.description, :controller => 'players', :action => 'drop', :id => @player, :item_id => item %></div>
+<% end %>
+
+<h3>exits:</h3>
 <% for passage in @player.location.exits do %>
 	<%= link_to passage.title, :controller => 'players', :action => 'move', :id => @player, :passage_id => passage %>
 <% end %>
