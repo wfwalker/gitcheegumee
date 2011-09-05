@@ -44,7 +44,7 @@ class PlayersController < ApplicationController
       @item.location_id = 0
       @item.save
     else
-      raise "Illegal move, player %d in location %d using passage with source id %d" % [@player.id, @player.location.id, @passage.source_id]
+      raise "Illegal take, player %d in location %d cannot pick up %d" % [@player.id, @player.location.id, @item.id]
     end
 
     redirect_to :action => 'show', :id => @player
@@ -59,7 +59,7 @@ class PlayersController < ApplicationController
       @item.location_id = @player.location_id
       @item.save
     else
-      raise "Illegal move, player %d in location %d using passage with source id %d" % [@player.id, @player.location.id, @passage.source_id]
+      raise "Illegal take, player %d in location %d cannot drop %d" % [@player.id, @player.location.id, @item.id]
     end
 
     redirect_to :action => 'show', :id => @player
