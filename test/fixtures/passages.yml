@@ -2,10 +2,10 @@
 
 one:
   title: MyString
-  source_id: 1
-  destination_id: 1
+  source: location_one
+  destination: location_one
 
 two:
   title: MyString
-  source_id: 1
-  destination_id: 1
+  source: location_one
+  destination: location_one
