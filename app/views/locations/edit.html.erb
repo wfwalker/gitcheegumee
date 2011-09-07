@@ -11,17 +11,19 @@
     <%= f.label :description %><br />
     <%= f.text_area :description %>
   </p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
   <p>
     <b>Connected Rooms:</b>
     <% for exit in @location.exits do %>
-      <div><%= link_to exit.title + " ==> " + exit.destination.title, edit_location_url(exit.destination_id) %></div>
+      <div><%= link_to exit.title, edit_passage_url(exit) %> ==> <%= link_to exit.destination.title, edit_location_url(exit.destination_id) %></div>
     <% end %>
     <%= link_to 'Add Passage', new_passage_url() %>
     </p>  
   <p>
-    <%= f.submit 'Update' %>
-  </p>
-<% end %>
+
 
 <%= link_to 'Show', @location %> |
 <%= link_to 'Back', locations_path %>

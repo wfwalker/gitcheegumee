@@ -4,7 +4,13 @@
 
 <hr />
 
-<p><%= @player.location.description %>.</p>
+<p>
+	<%= @player.location.description %>.
+</p>
+
+<% for passage in @player.location.exits do %>
+	<p><%= link_to passage.description, :controller => 'players', :action => 'move', :id => @player, :passage_id => passage %>.</p>
+<% end %>
 
 <% otherLocalPlayers = @player.location.players.select { |player| player.id != @player.id } %>
 
@@ -20,8 +26,3 @@
 	<div>You carry <%= link_to item.description, :controller => 'players', :action => 'drop', :id => @player, :item_id => item %></div>
 <% end %>
 
-<h3>exits:</h3>
-<% for passage in @player.location.exits do %>
-	<%= link_to passage.title, :controller => 'players', :action => 'move', :id => @player, :passage_id => passage %>
-<% end %>
-</p>

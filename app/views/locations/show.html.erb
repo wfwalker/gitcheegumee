@@ -18,7 +18,7 @@
 <p>
   <b>Exits:</b>
   <% for exit in @location.exits do %>
-  	<div><%= link_to exit.title, location_url(exit.destination_id) %></div>
+  	<div><%= link_to exit.title, location_url(exit.destination_id) %> ("<%= exit.description %>")</div>
   <% end %>
 </p>
 

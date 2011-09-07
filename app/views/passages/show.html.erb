@@ -4,8 +4,13 @@
 </p>
 
 <p>
+  <b>Description:</b>
+  <%=h @passage.description %>
+</p>
+
+<p>
   <b>Source:</b>
-  <%=h @passage.source_id %>
+  <%= link_to @passage.source.title, location_url(@passage.source) %>
 </p>
 
 <p>
