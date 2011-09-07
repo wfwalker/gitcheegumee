@@ -10,11 +10,10 @@
 
 <% @items.each do |item| %>
   <tr>
-    <td><%=h item.name %></td>
+    <td><%= link_to item.name, item %></td>
     <td><%=h item.description %></td>
-    <td><%=h item.location_id %></td>
-    <td><%=h item.player_id %></td>
-    <td><%= link_to 'Show', item %></td>
+    <td><%=h item.location ? item.location.title : '' %></td>
+    <td><%=h item.player ? item.player.name : '' %></td>
     <td><%= link_to 'Edit', edit_item_path(item) %></td>
     <td><%= link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
