@@ -21,23 +21,23 @@ class LocationsControllerTest < ActionController::TestCase
   end
 
   test "should show location" do
-    get :show, :id => locations(:one).to_param
+    get :show, :id => locations(:location_one).to_param
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, :id => locations(:one).to_param
+    get :edit, :id => locations(:location_one).to_param
     assert_response :success
   end
 
   test "should update location" do
-    put :update, :id => locations(:one).to_param, :location => { }
+    put :update, :id => locations(:location_one).to_param, :location => { }
     assert_redirected_to location_path(assigns(:location))
   end
 
   test "should destroy location" do
     assert_difference('Location.count', -1) do
-      delete :destroy, :id => locations(:one).to_param
+      delete :destroy, :id => locations(:location_one).to_param
     end
 
     assert_redirected_to locations_path

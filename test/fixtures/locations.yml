@@ -1,9 +1,9 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  title: MyString
-  description: MyText
+location_one:
+  title: 'one title'
+  description: 'one description'
 
-two:
-  title: MyString
-  description: MyText
+location_two:
+  title: 'two title'
+  description: 'two description'

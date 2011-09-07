@@ -1,11 +1,11 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  name: MyString
-  email: MyString
-  location_id: 1
+player_one:
+  name: 'MrOne'
+  email: 'one@one.com'
+  location: location_one
 
-two:
-  name: MyString
-  email: MyString
-  location_id: 1
+player_two:
+  name: 'MrTwo'
+  email: 'two@two.com'
+  location: location_one
