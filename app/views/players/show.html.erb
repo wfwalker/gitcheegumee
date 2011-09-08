@@ -14,15 +14,51 @@
 
 <% otherLocalPlayers = @player.location.players.select { |player| player.id != @player.id } %>
 
+<div id="playerList">
 <% if otherLocalPlayers.length > 0 %>
-	<p><%= otherLocalPlayers.collect { |player| player.name }.join(', ') %> is here.<p>
+	<div><%= otherLocalPlayers.collect { |player| player.name }.join(', ') %> is here.</div>
 <% end %>
+</div>
 
+<div id="itemList">
 <% for item in @player.location.items do %>
 	<div><%= link_to item.description, :controller => 'players', :action => 'take', :id => @player, :item_id => item %> is here</div>
 <% end %>
+</div>
 
 <% for item in @player.items do %>
 	<div>You carry <%= link_to item.description, :controller => 'players', :action => 'drop', :id => @player, :item_id => item %></div>
 <% end %>
+
+<div id="livestuff">
+</div>
+
+<script>
+function alertMsg() {
+	$.getJSON('/locations/show_players/<%= @player.location_id %>.json', function(data) {
+		$('#playerList').empty();
+		for (var key in data) {
+			var player = data[key]['player'];
+			if (player['id'] != <%= @player.id %>) {
+				$('#playerList').append('<div>' + player['name'] + ' is here.</div>');
+			}
+		};
+	});
+
+	$.getJSON('/locations/show_items/<%= @player.location_id %>.json', function(data) {
+		$('#itemList').empty();
+		//http://localhost:3000/players/take/1?item_id=1
+		for (var key in data) {
+			var item = data[key]['item'];
+			$('#itemList').append('<div><a href=/players/take/<%= @player.id %>?item_id=' + item['id'] + '>' + item['description'] + '</a> is here.</div>');
+		};
+  	});
+	var t = setTimeout("alertMsg()",3000);
+}
+
+$(document).ready(function(){     
+	var t = setTimeout("alertMsg()",3000);
+})
+</script>
+
 
