@@ -18,6 +18,25 @@ class LocationsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @location }
+      format.json  { render :json => @location }
+    end
+  end
+
+  def show_players
+    @location = Location.find(params[:id])
+
+    respond_to do |format|
+      format.xml  { render :xml => @location.players }
+      format.json  { render :json => @location.players }
+    end
+  end
+
+  def show_items
+    @location = Location.find(params[:id])
+
+    respond_to do |format|
+      format.xml  { render :xml => @location.items }
+      format.json  { render :json => @location.items }
     end
   end
 

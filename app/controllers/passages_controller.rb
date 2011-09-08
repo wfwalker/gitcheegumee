@@ -18,6 +18,7 @@ class PassagesController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @passage }
+      format.json  { render :json => @passage }
     end
   end
 
