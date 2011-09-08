@@ -14,12 +14,12 @@
 <%= yield %>
 
 <div style="position: absolute; top: 100px; left: 10px">
-edit:
+<p>edit:</p>
 <div><%= link_to "locations", :controller => 'locations', :action => 'index' %></div>
 <div><%= link_to "players", :controller => 'players', :action => 'index' %></div>
 <div><%= link_to "items", :controller => 'items', :action => 'index' %></div>
 <div><%= link_to "passages", :controller => 'passages', :action => 'index' %></div>
-play:
+<p>play:</p>
 <div><%= link_to "as bill", :controller => 'players', :action => 'show' %>
 </div>
 
