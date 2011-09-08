@@ -9,7 +9,7 @@
   </p>
   <p>
     <%= f.label :description %><br />
-    <%= f.text_field :description %>
+    <%= f.text_area :description %>
   </p>
   <p>
     <%= collection_select("passage", "source_id", Location.find(:all), :id, :title, {:prompt => true}) %>

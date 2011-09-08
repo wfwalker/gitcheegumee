@@ -11,7 +11,7 @@
   <tr>
     <td><%=h player.name %></td>
     <td><%=h player.email %></td>
-    <td><%=h player.location_id %></td>
+    <td><%=h player.location.title %></td>
     <td><%= link_to 'Show', player %></td>
     <td><%= link_to 'Edit', edit_player_path(player) %></td>
     <td><%= link_to 'Destroy', player, :confirm => 'Are you sure?', :method => :delete %></td>

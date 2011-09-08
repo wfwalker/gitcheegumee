@@ -1,14 +1,10 @@
 <h1>Listing locations</h1>
 
 <table>
-  <tr>
-    <th>Title</th>
-  </tr>
-
 <% @locations.each do |location| %>
   <tr>
     <td valign="top"><%= link_to location.title, location %></td>
-    <td valign="top"><%=h location.description %></td>
+    <td valign="top" style="padding-bottom: 20px;" ><%=h location.description %></td>
     <td valign="top"><%= link_to 'Edit', edit_location_path(location) %></td>
     <td valign="top"><%= link_to 'Destroy', location, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>

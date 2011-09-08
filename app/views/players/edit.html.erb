@@ -13,7 +13,7 @@
   </p>
   <p>
     <%= f.label :location_id %><br />
-    <%= f.text_field :location_id %>
+    <%= collection_select("player", "location_id", Location.find(:all), :id, :title, {:prompt => true}) %>
   </p>
   <p>
     <%= f.submit 'Update' %>
