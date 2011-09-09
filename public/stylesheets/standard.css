@@ -8,8 +8,8 @@ body {
  }
 
 body, p, ol, ul, td {
-  font-family: Georgia;
-  font-size:   18px;
+  font-family: 'IM Fell DW Pica', Georgia;
+  font-size:   24px;
 }
 
 pre {
