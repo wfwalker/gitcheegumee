@@ -93,6 +93,19 @@ class PlayersController < ApplicationController
     redirect_to :action => 'show', :id => @player
   end
 
+  def say
+    @player = Player.find(params[:id])
+    utterance = params[:utterance]
+
+    happening = Happening.new()
+    happening.player_id = @player.id
+    happening.location_id = @player.location_id
+    happening.description = "%s said %s" % [@player.name, utterance]
+    happening.save
+
+    redirect_to :action => 'show', :id => @player
+  end
+
   # GET /players/new
   # GET /players/new.xml
   def new

@@ -27,11 +27,8 @@
 
 
 <div>
-	<% form_for(Happening.new) do |f| %>
-		<%= f.error_messages %>
-		<%= f.text_field :description %>
-		<%= hidden_field("happening", "location_id", :value => @player.location.id) %>
-		<%= hidden_field("happening", "player_id", :value => @player.id) %>
+	<% form_for(@player,:url => url_for(:controller => 'players', :action => 'say', :id => @player)) do |f| %>
+		<input type="string" name="utterance">
 		<%= f.submit 'Update' %>
 	<% end %>
 </div>
