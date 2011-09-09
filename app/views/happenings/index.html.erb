@@ -1,0 +1,28 @@
+<h1>Listing happenings</h1>
+
+<table>
+  <tr>
+    <th>Description</th>
+    <th>Location</th>
+    <th>Player</th>
+    <th>Item</th>
+    <th>Passage</th>
+  </tr>
+
+<% @happenings.each do |happening| %>
+  <tr>
+    <td><%=h happening.description %></td>
+    <td><%=h happening.location_id %></td>
+    <td><%=h happening.player_id %></td>
+    <td><%=h happening.item_id %></td>
+    <td><%=h happening.passage_id %></td>
+    <td><%= link_to 'Show', happening %></td>
+    <td><%= link_to 'Edit', edit_happening_path(happening) %></td>
+    <td><%= link_to 'Destroy', happening, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New happening', new_happening_path %>

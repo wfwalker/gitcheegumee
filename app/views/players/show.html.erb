@@ -12,23 +12,29 @@
 	<p><%= link_to passage.description, :controller => 'players', :action => 'move', :id => @player, :passage_id => passage %>.</p>
 <% end %>
 
-<% otherLocalPlayers = @player.location.players.select { |player| player.id != @player.id } %>
-
 <div id="playerList">
-<% if otherLocalPlayers.length > 0 %>
-	<div><%= otherLocalPlayers.collect { |player| player.name }.join(', ') %> is here.</div>
-<% end %>
 </div>
 
 <div id="itemList">
-<% for item in @player.location.items do %>
-	<div><%= link_to item.description, :controller => 'players', :action => 'take', :id => @player, :item_id => item %> is here</div>
-<% end %>
+</div>
+
+<div id="happeningList">
 </div>
 
 <% for item in @player.items do %>
 	<div>You carry <%= link_to item.description, :controller => 'players', :action => 'drop', :id => @player, :item_id => item %></div>
 <% end %>
+
+
+<div>
+	<% form_for(Happening.new) do |f| %>
+		<%= f.error_messages %>
+		<%= f.text_field :description %>
+		<%= hidden_field("happening", "location_id", :value => @player.location.id) %>
+		<%= hidden_field("happening", "player_id", :value => @player.id) %>
+		<%= f.submit 'Update' %>
+	<% end %>
+</div>
 
 <div id="livestuff">
 </div>
@@ -45,6 +51,14 @@ function alertMsg() {
 		};
 	});
 
+	$.getJSON('/locations/show_recent_happenings/<%= @player.location_id %>.json', function(data) {
+		$('#happeningList').empty();
+		for (var key in data) {
+			var summary = data[key];
+			$('#happeningList').append('<div>' + summary + '</div>');
+		};
+	});
+
 	$.getJSON('/locations/show_items/<%= @player.location_id %>.json', function(data) {
 		$('#itemList').empty();
 		//http://localhost:3000/players/take/1?item_id=1
@@ -57,7 +71,7 @@ function alertMsg() {
 }
 
 $(document).ready(function(){     
-	var t = setTimeout("alertMsg()",3000);
+	alertMsg();
 })
 </script>
 

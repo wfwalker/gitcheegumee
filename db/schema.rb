@@ -9,7 +9,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110907064236) do
+ActiveRecord::Schema.define(:version => 20110909044354) do
+
+  create_table "happenings", :force => true do |t|
+    t.text     "description"
+    t.integer  "location_id"
+    t.integer  "player_id"
+    t.integer  "item_id"
+    t.integer  "passage_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "items", :force => true do |t|
     t.string   "name"

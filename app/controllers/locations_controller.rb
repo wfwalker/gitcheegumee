@@ -31,6 +31,17 @@ class LocationsController < ApplicationController
     end
   end
 
+  def show_recent_happenings
+    @location = Location.find(params[:id])
+    recent_happenings = @location.happenings.recent
+    summaries = recent_happenings.collect { |happening| happening.description }
+
+    respond_to do |format|
+      format.xml  { render :xml => summaries }
+      format.json  { render :json => summaries }
+    end
+  end
+
   def show_items
     @location = Location.find(params[:id])
 
