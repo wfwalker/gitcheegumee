@@ -100,7 +100,7 @@ class PlayersController < ApplicationController
     happening = Happening.new()
     happening.player_id = @player.id
     happening.location_id = @player.location_id
-    happening.description = "%s said %s" % [@player.name, utterance]
+    happening.description = "%s said &#147;%s&#148;" % [@player.name, CGI.escapeHTML(utterance)]
     happening.save
 
     redirect_to :action => 'show', :id => @player
