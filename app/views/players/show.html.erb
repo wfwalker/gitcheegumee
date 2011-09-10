@@ -51,7 +51,7 @@ function alertMsg() {
 	$.getJSON('/locations/show_recent_happenings/<%= @player.location_id %>.json', function(data) {
 		$('#happeningList').empty();
 		for (var key in data) {
-			var summary = data[key];
+			var summary = data[key]['happening']['description'];
 			$('#happeningList').append('<div>' + summary + '</div>');
 		};
 	});

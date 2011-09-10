@@ -34,11 +34,10 @@ class LocationsController < ApplicationController
   def show_recent_happenings
     @location = Location.find(params[:id])
     recent_happenings = @location.happenings.recent
-    summaries = recent_happenings.collect { |happening| happening.description }
 
     respond_to do |format|
-      format.xml  { render :xml => summaries }
-      format.json  { render :json => summaries }
+      format.xml  { render :xml => recent_happenings }
+      format.json  { render :json => recent_happenings }
     end
   end
 
