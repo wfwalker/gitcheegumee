@@ -8,9 +8,11 @@
 	<%= @player.location.description %>.
 </p>
 
-<% for passage in @player.location.exits do %>
-	<p><%= link_to passage.description, :controller => 'players', :action => 'move', :id => @player, :passage_id => passage %>.</p>
-<% end %>
+<p>
+	<% for passage in @player.location.exits do %>
+		<div><%= link_to passage.description, :controller => 'players', :action => 'move', :id => @player, :passage_id => passage %>.</div>
+	<% end %>
+</p>
 
 <div id="happeningList">
 </div>
@@ -26,16 +28,14 @@
 	<div>You carry <%= link_to item.description, :controller => 'players', :action => 'drop', :id => @player, :item_id => item %></div>
 <% end %>
 
-
+<p>
 <div>
 	<% form_for(@player,:url => url_for(:controller => 'players', :action => 'say', :id => @player)) do |f| %>
-		<%= f.submit 'say' %>
-		<input type="string" name="utterance">
+		<%= f.submit "%s said" % @player.name %>
+		&#147; <input type="string" name="utterance"> &#148;
 	<% end %>
 </div>
-
-<div id="livestuff">
-</div>
+</p>
 
 <script>
 function alertMsg() {
