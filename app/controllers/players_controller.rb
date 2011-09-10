@@ -22,6 +22,18 @@ class PlayersController < ApplicationController
     end
   end
 
+  # GET /players/play/1
+  # GET /players/play/1.xml
+  def play
+    @player = Player.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @player }
+      format.json  { render :json => @player }
+    end
+  end
+
   def move
     @player = Player.find(params[:id])
     @passage = Passage.find(params[:passage_id])
@@ -46,7 +58,7 @@ class PlayersController < ApplicationController
       raise "Illegal move, player %d in location %d using passage with source id %d" % [@player.id, @player.location.id, @passage.source_id]
     end
 
-    redirect_to :action => 'show', :id => @player
+    redirect_to :action => 'play', :id => @player
   end
 
   def take
@@ -68,7 +80,7 @@ class PlayersController < ApplicationController
       raise "Illegal take, player %d in location %d cannot pick up %d" % [@player.id, @player.location.id, @item.id]
     end
 
-    redirect_to :action => 'show', :id => @player
+    redirect_to :action => 'play', :id => @player
   end
 
   def drop
@@ -90,7 +102,7 @@ class PlayersController < ApplicationController
       raise "Illegal take, player %d in location %d cannot drop %d" % [@player.id, @player.location.id, @item.id]
     end
 
-    redirect_to :action => 'show', :id => @player
+    redirect_to :action => 'play', :id => @player
   end
 
   def say
@@ -103,7 +115,7 @@ class PlayersController < ApplicationController
     happening.description = "%s said &#147;%s&#148;" % [@player.name, CGI.escapeHTML(utterance)]
     happening.save
 
-    redirect_to :action => 'show', :id => @player
+    redirect_to :action => 'play', :id => @player
   end
 
   # GET /players/new

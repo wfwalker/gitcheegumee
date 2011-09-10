@@ -1,0 +1,76 @@
+<p>
+  <%=h @player.name %>
+</p>
+
+<hr />
+
+<p>
+	<%= @player.location.description %>.
+</p>
+
+<% for passage in @player.location.exits do %>
+	<p><%= link_to passage.description, :controller => 'players', :action => 'move', :id => @player, :passage_id => passage %>.</p>
+<% end %>
+
+<div id="happeningList">
+</div>
+
+<div id="playerList">
+</div>
+
+<div id="itemList">
+</div>
+
+
+<% for item in @player.items do %>
+	<div>You carry <%= link_to item.description, :controller => 'players', :action => 'drop', :id => @player, :item_id => item %></div>
+<% end %>
+
+
+<div>
+	<% form_for(@player,:url => url_for(:controller => 'players', :action => 'say', :id => @player)) do |f| %>
+		<%= f.submit 'say' %>
+		<input type="string" name="utterance">
+	<% end %>
+</div>
+
+<div id="livestuff">
+</div>
+
+<script>
+function alertMsg() {
+	$.getJSON('/locations/show_players/<%= @player.location_id %>.json', function(data) {
+		$('#playerList').empty();
+		for (var key in data) {
+			var player = data[key]['player'];
+			if (player['id'] != <%= @player.id %>) {
+				$('#playerList').append('<div>' + player['name'] + ' is here.</div>');
+			}
+		};
+	});
+
+	$.getJSON('/locations/show_recent_happenings/<%= @player.location_id %>.json', function(data) {
+		$('#happeningList').empty();
+		for (var key in data) {
+			var summary = data[key]['happening']['description'];
+			$('#happeningList').append('<div>' + summary + '</div>');
+		};
+	});
+
+	$.getJSON('/locations/show_items/<%= @player.location_id %>.json', function(data) {
+		$('#itemList').empty();
+		//http://localhost:3000/players/take/1?item_id=1
+		for (var key in data) {
+			var item = data[key]['item'];
+			$('#itemList').append('<div><a href=/players/take/<%= @player.id %>?item_id=' + item['id'] + '>' + item['description'] + '</a> is here.</div>');
+		};
+  	});
+	var t = setTimeout("alertMsg()",3000);
+}
+
+$(document).ready(function(){     
+	alertMsg();
+})
+</script>
+
+
