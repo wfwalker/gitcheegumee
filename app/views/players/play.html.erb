@@ -53,6 +53,7 @@ function alertMsg() {
 		$('#happeningList').empty();
 		for (var key in data) {
 			var summary = data[key]['happening']['description'];
+			summary = summary.replace('<%= @player.name %>', 'You');
 			$('#happeningList').append('<div>' + summary + '</div>');
 		};
 	});
