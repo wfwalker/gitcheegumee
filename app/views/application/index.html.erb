@@ -1,0 +1,32 @@
+<h1>Municipal Organs of the Gitchee Gumee</h1>
+
+<h2>In a World that combines Pipe Organs, Neighborhood Politics, Sky Pirates, the Transmunicipal Mail Service, and Banjo-Playing Saboteurs.</h2>
+
+<a href="#" id="loginlink"><img src="https://browserid.org/i/sign_in_green.png" alt="sign in" /></a> or 
+<a href="/application/logout" >logout</a>
+
+<% form_tag('/application/verify_browserid', :method => 'POST', :id => 'browserIDform') do %>
+<% end %>
+
+<script type="text/javascript">
+<!--
+$("a#loginlink").click(function() {
+	navigator.id.getVerifiedEmail(function(theBrowserIDAssertion) {
+	    if (theBrowserIDAssertion) {
+	        // This code will be invoked once the user has successfully
+	        // selected an email address they control to sign in with.    
+
+	    	$('#browserIDform').append('<input type="hidden" id="assertion" name="assertion" value="' + theBrowserIDAssertion + '" />');
+	    	$("#browserIDform").submit();
+	    } else {             
+	        // something went wrong! we didn't generate an assertion, don't bother redrawing the page
+	    }
+	});			
+});
+-->
+</script>
+
+
+<img src="/images/aerodromes.png" width="800px" />
+  </body>
+</html>

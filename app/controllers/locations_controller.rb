@@ -1,4 +1,8 @@
 class LocationsController < ApplicationController
+
+  before_filter :verify_credentials, :only => [:new, :create, :edit, :index, :update, :destroy]  
+  before_filter :update_activity_timer, :except => [:new, :create, :edit, :index, :update, :destroy]  
+
   # GET /locations
   # GET /locations.xml
   def index
@@ -32,6 +36,8 @@ class LocationsController < ApplicationController
   end
 
   def show_recent_happenings
+    logger.error("recenthappenings: %s" % session[:email])
+
     @location = Location.find(params[:id])
     recent_happenings = @location.happenings.recent
 

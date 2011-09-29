@@ -2,19 +2,19 @@ require 'test_helper'
 
 class PassagesControllerTest < ActionController::TestCase
   test "should get index" do
-    get :index
+    get :index, {}, logged_in()
     assert_response :success
     assert_not_nil assigns(:passages)
   end
 
   test "should get new" do
-    get :new
+    get :new, {}, logged_in()
     assert_response :success
   end
 
   test "should create passage" do
     assert_difference('Passage.count') do
-      post :create, :passage => { }
+      post :create, {:passage => { }}, logged_in()
     end
 
     assert_redirected_to passage_path(assigns(:passage))
@@ -26,18 +26,18 @@ class PassagesControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
-    get :edit, :id => passages(:one).to_param
+    get :edit, {:id => passages(:one).to_param}, logged_in()
     assert_response :success
   end
 
   test "should update passage" do
-    put :update, :id => passages(:one).to_param, :passage => { }
+    put :update, {:id => passages(:one).to_param, :passage => { }}, logged_in()
     assert_redirected_to passage_path(assigns(:passage))
   end
 
   test "should destroy passage" do
     assert_difference('Passage.count', -1) do
-      delete :destroy, :id => passages(:one).to_param
+      delete :destroy, {:id => passages(:one).to_param}, logged_in()
     end
 
     assert_redirected_to passages_path

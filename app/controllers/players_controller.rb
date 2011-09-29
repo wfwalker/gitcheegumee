@@ -1,4 +1,7 @@
 class PlayersController < ApplicationController
+  before_filter :verify_credentials, :only => [:new, :create, :edit, :register, :play, :index, :update, :destroy]  
+  before_filter :update_activity_timer, :except => [:new, :create, :edit, :register, :play, :index, :update, :destroy]  
+
   # GET /players
   # GET /players.xml
   def index
@@ -129,6 +132,19 @@ class PlayersController < ApplicationController
     end
   end
 
+  # GET /players/register?email=blah
+  # GET /players/register.xml
+  def register
+    @player = Player.new
+    @player.email = params[:email]
+    @player.location_id = params[:location_id]
+
+    respond_to do |format|
+      format.html # register.html.erb
+      format.xml  { render :xml => @player }
+    end
+  end
+
   # GET /players/1/edit
   def edit
     @player = Player.find(params[:id])
@@ -138,6 +154,8 @@ class PlayersController < ApplicationController
   # POST /players.xml
   def create
     @player = Player.new(params[:player])
+
+    # login as this guy!
 
     respond_to do |format|
       if @player.save

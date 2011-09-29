@@ -2,19 +2,19 @@ require 'test_helper'
 
 class ItemsControllerTest < ActionController::TestCase
   test "should get index" do
-    get :index
+    get :index, {}, logged_in()
     assert_response :success
     assert_not_nil assigns(:items)
   end
 
   test "should get new" do
-    get :new
+    get :new, {}, logged_in()
     assert_response :success
   end
 
   test "should create item" do
     assert_difference('Item.count') do
-      post :create, :item => { }
+      post :create, {:item => { }}, logged_in()
     end
 
     assert_redirected_to item_path(assigns(:item))
@@ -26,18 +26,18 @@ class ItemsControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
-    get :edit, :id => items(:one).to_param
+    get :edit, {:id => items(:one).to_param}, logged_in()
     assert_response :success
   end
 
   test "should update item" do
-    put :update, :id => items(:one).to_param, :item => { }
+    put :update, {:id => items(:one).to_param, :item => { }}, logged_in()
     assert_redirected_to item_path(assigns(:item))
   end
 
   test "should destroy item" do
     assert_difference('Item.count', -1) do
-      delete :destroy, :id => items(:one).to_param
+      delete :destroy, {:id => items(:one).to_param}, logged_in()
     end
 
     assert_redirected_to items_path

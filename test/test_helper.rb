@@ -35,4 +35,9 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+
+  def logged_in()
+    return {:email => 'testsst@user.com', :player_id => 1, :login_time => Time.now.to_i}
+  end
 end
+
