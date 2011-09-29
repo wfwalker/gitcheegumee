@@ -7,6 +7,7 @@
   <title>Items: <%= controller.action_name %></title>
   <%= stylesheet_link_tag 'standard' %>
   <%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js' %>
+  <%= javascript_include_tag 'https://browserid.org/include.js' %>
   <link href='http://fonts.googleapis.com/css?family=IM+Fell+DW+Pica' rel='stylesheet' type='text/css'>  
 </head>
 <body>
@@ -16,12 +17,15 @@
 <%= yield %>
 
 <div style="position: absolute; top: 100px; left: 30px; font-size: 10pt">
+
 <div><%= link_to "edit locations", :controller => 'locations', :action => 'index' %></div>
 <div><%= link_to "edit players", :controller => 'players', :action => 'index' %></div>
 <div><%= link_to "edit items", :controller => 'items', :action => 'index' %></div>
 <div><%= link_to "edit passages", :controller => 'passages', :action => 'index' %></div>
-<div><%= link_to "play as bill", :controller => 'players', :action => 'show', :id => 1 %>
-<div><a href="/index.html">title page</a></div>
+
+<div><%= link_to "logout", :controller => 'application', :action => 'logout' %>
+<div><%= link_to "play!", :controller => 'players', :action => 'play', :id => session[:player_id] %>
+<div>'<%= session[:email] %>'</div>
 </div>
 
 </body>

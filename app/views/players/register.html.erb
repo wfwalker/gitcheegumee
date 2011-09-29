@@ -7,14 +7,8 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </p>
-  <p>
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </p>
-  <p>
-    <%= f.label :location_id %><br />
-    <%= f.text_field :location_id %>
-  </p>
+  <%= f.text_field :email, :hidden => true %>
+  <%= f.text_field :location_id, :hidden => true %>
   <p>
     <%= f.submit 'Register' %>
   </p>

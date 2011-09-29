@@ -1,6 +1,6 @@
 class PlayersController < ApplicationController
-  before_filter :verify_credentials, :only => [:new, :create, :edit, :register, :play, :index, :update, :destroy]  
-  before_filter :update_activity_timer, :except => [:new, :create, :edit, :register, :play, :index, :update, :destroy]  
+  before_filter :verify_credentials, :only => [:new, :create, :edit, :play, :register, :index, :update, :destroy]  
+  before_filter :update_activity_timer, :except => [:new, :create, :edit, :play, :register, :index, :update, :destroy]  
 
   # GET /players
   # GET /players.xml
@@ -110,6 +110,7 @@ class PlayersController < ApplicationController
 
   def say
     @player = Player.find(params[:id])
+    # TODO, ensure EITHER this is an admin user OR the :id matches the player_id in the session
     utterance = params[:utterance]
 
     happening = Happening.new()
@@ -189,6 +190,8 @@ class PlayersController < ApplicationController
   def destroy
     @player = Player.find(params[:id])
     @player.destroy
+
+    #TODO what if someone is logged in currently as this guy?
 
     respond_to do |format|
       format.html { redirect_to(players_url) }
