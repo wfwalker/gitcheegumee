@@ -1,11 +1,9 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :players
-
   map.resources :happenings
 
   map.resources :items
 
-  map.resources :players
+  map.resources :players, :collection => { :register => :get }
 
   map.resources :passages
 
