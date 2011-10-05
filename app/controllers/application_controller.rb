@@ -135,8 +135,8 @@ class ApplicationController < ActionController::Base
 			    redirect_to url_for(:controller => 'players', :action => 'register', :email => parsedResults["email"], :location_id => 1)
 			end
 		  else
-		    logger.error("VC: invalid assertion, no login for " + parsedResults["email"])
-		    flash[:error] = 'Invalid assertion, no login for ' + parsedResults["email"]
+		    logger.error("VC: invalid assertion")
+		    flash[:error] = 'Invalid assertion'
 			clear_session()
 			redirect_to :controller => 'application', :action => 'index'
 		  end
