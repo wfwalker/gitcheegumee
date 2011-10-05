@@ -111,7 +111,15 @@ class ApplicationController < ActionController::Base
 		  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 		        
 		  req = Net::HTTP::Post.new(url.path)
-		  req.set_form_data({'assertion' => params[:assertion], 'audience' => 'localhost:3000'})
+
+		  if request.port != 80
+		  	audience = "%s:%d" % [request.host, request.port]
+		  else
+		  	audience = request.host
+		  end
+		  logger.error("\n\naudience " + audience + "\n\n")
+		  req.set_form_data({'assertion' => params[:assertion], 'audience' => audience})
+
 		  res = http.start {|http| http.request(req) } 
 		                                                            
 		  # results should be JSON like result {"status":"okay","email":"walker@shout.net","audience":"localhost","valid-until":1313649622973,"issuer":"browserid.org:443"}
