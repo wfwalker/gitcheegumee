@@ -1,4 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+  # wfw root URL
+  map.connect '', :controller => 'application', :action => 'index'
+
+
   map.resources :happenings
 
   map.resources :items
