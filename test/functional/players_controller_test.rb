@@ -19,7 +19,9 @@ class PlayersControllerTest < ActionController::TestCase
       post :create, {:player => { :name => 'testname', :email => 'test@email.com' }}, logged_in()
     end
 
-    assert_redirected_to player_path(assigns(:player))
+    assert assigns(:player)
+    # TODO assert that we get redirected to action 'play'
+    assert_redirected_to(:controller => 'players', :action => 'play', :id => session[:player_id], :notice => 'Player was successfully created.')
   end
 
   test "should show player" do
