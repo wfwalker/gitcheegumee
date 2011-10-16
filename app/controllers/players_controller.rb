@@ -160,7 +160,8 @@ class PlayersController < ApplicationController
 
     respond_to do |format|
       if @player.save
-        format.html { redirect_to(@player, :notice => 'Player was successfully created.') }
+        populate_session(@player)
+        format.html { redirect_to(:action => 'play', :id => @player, :notice => 'Player was successfully created.') }
         format.xml  { render :xml => @player, :status => :created, :location => @player }
       else
         format.html { render :action => "new" }
