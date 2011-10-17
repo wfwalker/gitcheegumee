@@ -80,12 +80,14 @@ class ApplicationController < ActionController::Base
 	def clear_session
 		session[:email] = nil    
 		session[:player_id] = nil
+		session[:admin] = nil
 		session[:login_time] = nil 
 	end
 
 	def populate_session(aPlayer)
 		session[:email] = @player.email
 		session[:player_id] = @player.id 
+		session[:admin] = @player.admin 
 		session[:login_time] = Time.now.to_i     
 	end
 

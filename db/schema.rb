@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110909044354) do
+ActiveRecord::Schema.define(:version => 20111017052428) do
 
   create_table "happenings", :force => true do |t|
     t.text     "description"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(:version => 20110909044354) do
     t.integer  "location_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "admin"
   end
 
 end
