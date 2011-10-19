@@ -8,6 +8,8 @@
   <%=h @player.email %>
 </p>
 
+<img src='<%= gravatar_url_for(@player.email) %>' />
+
 <p>
   <b>Location:</b>
   <%=h @player.location_id %>
