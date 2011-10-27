@@ -1,7 +1,7 @@
 class PlayersController < ApplicationController
   before_filter :verify_credentials, :only => [:new, :create, :edit, :play, :register, :index, :update, :destroy]  
-  before_filter :update_activity_timer, :except => [:new, :create, :edit, :play, :register, :index, :update, :destroy]  
-
+  before_filter :verify_and_update_activity_timer
+  
   # GET /players
   # GET /players.xml
   def index

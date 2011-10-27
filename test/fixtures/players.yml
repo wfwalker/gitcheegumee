@@ -4,8 +4,10 @@ player_one:
   name: 'MrOne'
   email: 'one@one.com'
   location: location_one
+  admin: true
 
 player_two:
   name: 'MrTwo'
   email: 'two@two.com'
   location: location_one
+  admin: false

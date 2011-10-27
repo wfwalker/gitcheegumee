@@ -39,6 +39,11 @@ class PlayersControllerTest < ActionController::TestCase
     assert_redirected_to player_path(assigns(:player))
   end
 
+  test "logged in but timed out, should not update player" do
+    put :update, {:id => players(:player_one).to_param, :player => { }}, logged_in_timed_out()
+    assert_redirected_to(:controller => 'application', :action => 'index')
+  end
+
   test "should destroy player" do
     assert_difference('Player.count', -1) do
       delete :destroy, {:id => players(:player_one).to_param}, logged_in()

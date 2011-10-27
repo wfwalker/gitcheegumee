@@ -22,17 +22,18 @@ class ApplicationController < ActionController::Base
 		return ((session[:login_time] != nil) and (session[:email] != nil))
 	end
 
-	def update_activity_timer
+	def verify_and_update_activity_timer
 		if (has_valid_credentials) then
 		  # username is valid, login_time is valid, do the real checking
 		  inactivity = Time.now.to_i - session[:login_time]
 		  logger.error("VC: Checking timeout " + inactivity.to_s + " versus " + inactivity_timeout.to_s)
 
+		  logger.error("WOAH inactivity %d" % inactivity)
 		  if (inactivity > inactivity_timeout) then
-		    logger.error("VC: timed out, removing credentials")
 		    # timeout! clobber the session
 		    flash[:error] = 'Editing session timed out; please login again to continue editing'
 		    clear_session()
+ 		    redirect_to :controller => 'application', :action => 'index'
 		  else
 		    # active session, update the timer
 		    logger.error("VC: Actively logged in, setting activity timer")
@@ -44,38 +45,15 @@ class ApplicationController < ActionController::Base
 	end
 	
 	def verify_credentials
-		if (session[:email] == nil) then
+		if (has_valid_credentials) then
+		  logger.error("VC: Logged in")
+		else
 		  # username is nil, just clobber login_time
 		  logger.error("VC: Not logged in, redirecting to login")
 		  clear_session()
 		  redirect_to :controller => 'application', :action => 'index'
-		else
-		  if (session[:login_time] == nil) then
-		    # username is not nil but login_time is nil, this should never happen!
-		    logger.error("VC: timed out, removing credentials and redirecting")
-		    flash[:error] = 'Editing session timed out; please login again to continue editing'
-		    clear_session()
-		    redirect_to :controller => 'application', :action => 'index'
-		  else
-		    # username is valid, login_time is valid, do the real checking
-		    inactivity = Time.now.to_i - session[:login_time]
-		    logger.error("VC: Checking timeout " + inactivity.to_s + " versus " + inactivity_timeout.to_s)
-
-		    if (inactivity > inactivity_timeout) then
-		      # timeout! clobber the session
-		      logger.error("VC: timed out, removing credentials and redirecting")
-		      flash[:error] = 'Editing session timed out; please login again to continue editing'
-		      clear_session()
-			  redirect_to :controller => 'application', :action => 'index'
-		    else
-		      # active session, update the timer
-		      logger.error("VC: Actively logged in, setting activity timer")
-		      session[:login_time] = Time.now.to_i
-		    end
-		  end
 		end
 	end
-
 
 	def clear_session
 		session[:email] = nil    

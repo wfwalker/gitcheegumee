@@ -37,7 +37,11 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
 
   def logged_in()
-    return {:email => 'testsst@user.com', :player_id => 1, :login_time => Time.now.to_i}
+    return {:email => 'testsst@user.com', :player_id => 1, :login_time => Time.now.to_i - 23}
+  end
+
+  def logged_in_timed_out()
+    return {:email => 'testsst@user.com', :player_id => 1, :login_time => 1}
   end
 end
 
