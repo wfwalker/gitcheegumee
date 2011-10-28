@@ -1,5 +1,6 @@
 class PlayersController < ApplicationController
-  before_filter :verify_credentials, :only => [:new, :create, :edit, :play, :register, :index, :update, :destroy]  
+  before_filter :verify_admin_credentials, :only => [:new, :create, :edit, :register, :index, :update, :destroy]  
+  before_filter :verify_credentials, :only => [:play, :move, :take, :drop, :say]  
   before_filter :verify_and_update_activity_timer
   
   # GET /players

@@ -23,7 +23,16 @@ class ApplicationController < ActionController::Base
 			return false
 		else
 			sessionPlayer = Player.find_by_id(session[:player_id])
-			return (session[:email] == sessionPlayer.email)
+			return ((session[:email] == sessionPlayer.email) and (params[:id].to_s == session[:player_id].to_s))
+		end
+	end
+
+	def has_valid_admin_credentials
+		if session[:player_id] == nil
+			return false
+		else
+			sessionPlayer = Player.find_by_id(session[:player_id])
+			return (session[:email] == sessionPlayer.email and sessionPlayer.admin)
 		end
 	end
 
@@ -33,7 +42,6 @@ class ApplicationController < ActionController::Base
 		  inactivity = Time.now.to_i - session[:login_time]
 		  logger.error("VC: Checking timeout " + inactivity.to_s + " versus " + inactivity_timeout.to_s)
 
-		  logger.error("WOAH inactivity %d" % inactivity)
 		  if (inactivity > inactivity_timeout) then
 		    # timeout! clobber the session
 		    flash[:error] = 'Editing session timed out; please login again to continue editing'
@@ -60,6 +68,17 @@ class ApplicationController < ActionController::Base
 		end
 	end
 
+	def verify_admin_credentials
+		if (has_valid_admin_credentials) then
+		  logger.error("VC: Logged in or not administrator")
+		else
+		  # username is nil, just clobber login_time
+		  logger.error("VC: Not logged in or not administrator, redirecting to login")
+		  clear_session()
+		  redirect_to :controller => 'application', :action => 'index'
+		end
+	end
+
 	def clear_session
 		session[:email] = nil    
 		session[:player_id] = nil
@@ -70,7 +89,7 @@ class ApplicationController < ActionController::Base
 	def populate_session(aPlayer)
 		session[:email] = @player.email
 		session[:player_id] = @player.id 
-		session[:admin] = @player.admin 
+		session[:admin] = @player.admin
 		session[:login_time] = Time.now.to_i     
 	end
 

@@ -36,10 +36,18 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 
-  def logged_in()
+  def logged_in_one()
     return {
       :email => players(:player_one).email, 
       :player_id => players(:player_one).id, 
+      :login_time => Time.now.to_i - 23
+    }
+  end
+
+  def logged_in_two()
+    return {
+      :email => players(:player_two).email, 
+      :player_id => players(:player_two).id, 
       :login_time => Time.now.to_i - 23
     }
   end
