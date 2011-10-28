@@ -19,7 +19,12 @@ class ApplicationController < ActionController::Base
 	end         
   
 	def has_valid_credentials
-		return ((session[:login_time] != nil) and (session[:email] != nil))
+		if session[:player_id] == nil
+			return false
+		else
+			sessionPlayer = Player.find_by_id(session[:player_id])
+			return (session[:email] == sessionPlayer.email)
+		end
 	end
 
 	def verify_and_update_activity_timer

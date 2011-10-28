@@ -44,6 +44,11 @@ class PlayersControllerTest < ActionController::TestCase
     assert_redirected_to(:controller => 'application', :action => 'index')
   end
 
+  test "logged in but mismatched email, should not update player" do
+    put :update, {:id => players(:player_one).to_param, :player => { }}, logged_in_wrong_email_for_player_id()
+    assert_redirected_to(:controller => 'application', :action => 'index')
+  end
+
   test "should destroy player" do
     assert_difference('Player.count', -1) do
       delete :destroy, {:id => players(:player_one).to_param}, logged_in()
