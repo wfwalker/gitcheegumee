@@ -190,10 +190,14 @@ class PlayersController < ApplicationController
   # DELETE /players/1
   # DELETE /players/1.xml
   def destroy
+    if session[:player_id].to_s == params[:id].to_s
+      # CANNOT DELETE YOURSELF
+      redirect_to :controller => 'players', :action => 'index'
+      return
+    end
+
     @player = Player.find(params[:id])
     @player.destroy
-
-    #TODO what if someone is logged in currently as this guy?
 
     respond_to do |format|
       format.html { redirect_to(players_url) }

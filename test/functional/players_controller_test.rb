@@ -69,11 +69,17 @@ class PlayersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should destroy player" do
+  test "should not destroy yourself" do
+    delete :destroy, {:id => players(:player_one).to_param}, logged_in_one()
+    assert_redirected_to(:controller => 'players', :action => 'index')
+  end
+
+  test "should destroy another player" do
     assert_difference('Player.count', -1) do
-      delete :destroy, {:id => players(:player_one).to_param}, logged_in_one()
+      delete :destroy, {:id => players(:player_two).to_param}, logged_in_one()
     end
 
     assert_redirected_to players_path
   end
+
 end
