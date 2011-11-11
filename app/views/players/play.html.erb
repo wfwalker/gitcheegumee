@@ -1,5 +1,10 @@
 <p>
-  <%=h @player.name %>
+  <%=h @player.name %> at 
+	<% if (session[:admin]) %>
+		<%= link_to @player.location.title, :controller => 'locations', :action => 'edit', :id => @player.location_id %>
+	<% else %>
+		<%=h @player.location.title %>
+	<% end %>
 </p>
 
 <hr />
@@ -36,6 +41,7 @@
 	<% end %>
 </div>
 </p>
+
 
 <script>
 function alertMsg() {
