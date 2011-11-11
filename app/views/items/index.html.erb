@@ -10,12 +10,12 @@
 
 <% @items.each do |item| %>
   <tr>
-    <td><%= link_to item.name, item %></td>
-    <td><%=h item.description %></td>
-    <td><%=h item.location ? item.location.title : '' %></td>
-    <td><%=h item.player ? item.player.name : '' %></td>
-    <td><%= link_to 'Edit', edit_item_path(item) %></td>
-    <td><%= link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td valign="top"><%= link_to item.name, item %></td>
+    <td valign="top"><%=h item.description %></td>
+    <td valign="top"><%=h item.location ? item.location.title : '' %></td>
+    <td valign="top"><%=h item.player ? item.player.name : '' %></td>
+    <td valign="top"><%= link_to 'Edit', edit_item_path(item) %></td>
+    <td valign="top"><%= link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
