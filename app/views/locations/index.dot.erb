@@ -1,0 +1,12 @@
+digraph "g" {
+    // look ma! Comments!
+    <% @locations.each do |location| %>
+    	<% location.exits.each do |exit| %>
+	    	"<%= location.title %>" -> "<%= exit.destination.title %>";
+    	<% end %>
+
+    	<% if location.exits.count == 0 %>
+    		"<%= location.title %>";
+    	<% end %>
+    <% end %>
+}
