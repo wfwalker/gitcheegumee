@@ -28,7 +28,7 @@ class PassagesController < ApplicationController
   # GET /passages/new
   # GET /passages/new.xml
   def new
-    @passage = Passage.new
+    @passage = Passage.new(params[:passage])
 
     respond_to do |format|
       format.html # new.html.erb
