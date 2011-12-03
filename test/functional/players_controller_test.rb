@@ -16,7 +16,7 @@ class PlayersControllerTest < ActionController::TestCase
 
   test "should create player" do
     assert_difference('Player.count') do
-      post :create, {:player => { :name => 'testname', :email => 'test@email.com' }}, logged_in_one()
+      post :create, {:player => { :name => 'testname', :email => 'test@email.com', :location_id => 1 }}, logged_in_one()
     end
 
     assert assigns(:player)
@@ -57,6 +57,16 @@ class PlayersControllerTest < ActionController::TestCase
   test "player one can play" do
     get :play, {:id => players(:player_one).to_param}, logged_in_one()
     assert_response :success
+  end
+
+  test "unregistered guy with verified email can register" do
+    get :register, {}, verified_email_not_logged_in()
+    assert_response :success
+  end
+
+  test "unregistered guy without verified email cannot register" do
+    get :register, {}
+    assert_redirected_to(:controller => 'application', :action => 'index')
   end
 
   test "player one cannot play as player two" do

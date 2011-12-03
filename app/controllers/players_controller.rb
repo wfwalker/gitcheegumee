@@ -1,5 +1,5 @@
 class PlayersController < ApplicationController
-  before_filter :verify_admin_credentials, :only => [:new, :create, :edit, :register, :index, :update, :destroy]  
+  before_filter :verify_admin_credentials, :only => [:new, :edit, :index, :update, :destroy]  
   before_filter :verify_credentials, :only => [:play, :move, :take, :drop, :say]  
   before_filter :verify_and_update_activity_timer
   
@@ -126,7 +126,7 @@ class PlayersController < ApplicationController
   # GET /players/new
   # GET /players/new.xml
   def new
-    @player = Player.new
+    @player = Player.new(:location_id => 1)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -137,14 +137,17 @@ class PlayersController < ApplicationController
   # GET /players/register?email=blah
   # GET /players/register.xml
   def register
-    @player = Player.new
-    @player.email = params[:email]
-    @player.location_id = params[:location_id]
+    if (session[:email])
+      @player = Player.new(:location_id => 1)
+      @player.email = session[:email]
 
-    respond_to do |format|
-      format.html # register.html.erb
-      format.xml  { render :xml => @player }
-    end
+      respond_to do |format|
+        format.html # register.html.erb
+        format.xml  { render :xml => @player }
+      end
+    else
+      redirect_to :controller => 'application', :action => 'index'
+    end  
   end
 
   # GET /players/1/edit
@@ -155,19 +158,23 @@ class PlayersController < ApplicationController
   # POST /players
   # POST /players.xml
   def create
-    @player = Player.new(params[:player])
+    if (session[:email])
+      @player = Player.new(params[:player])
 
-    # login as this guy!
+      # login as this guy!
 
-    respond_to do |format|
-      if @player.save
-        populate_session(@player)
-        format.html { redirect_to(:action => 'play', :id => @player, :notice => 'Player was successfully created.') }
-        format.xml  { render :xml => @player, :status => :created, :location => @player }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @player.errors, :status => :unprocessable_entity }
+      respond_to do |format|
+        if @player.save
+          populate_session(@player)
+          format.html { redirect_to(:action => 'play', :id => @player, :notice => 'Player was successfully created.') }
+          format.xml  { render :xml => @player, :status => :created, :location => @player }
+        else
+          format.html { render :action => "new" }
+          format.xml  { render :xml => @player.errors, :status => :unprocessable_entity }
+        end
       end
+    else
+      redirect_to :controller => 'application', :action => 'index'
     end
   end
 

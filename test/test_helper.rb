@@ -44,6 +44,12 @@ class ActiveSupport::TestCase
     }
   end
 
+  def verified_email_not_logged_in()
+    return {
+      :email => "totally@new.email", 
+    }
+  end
+
   def logged_in_two()
     return {
       :email => players(:player_two).email, 

@@ -141,7 +141,7 @@ class ApplicationController < ActionController::Base
 			    redirect_to url_for(:controller => 'players', :action => 'play', :id => @player) 
 			else
 				flash[:error] = 'Welcome, please register'
-				@player = Player.new
+				@player = Player.new(:location_id => 1)
 				@player.email = parsedResults["email"]
 			    populate_session(@player)
 			    redirect_to url_for(:controller => 'players', :action => 'register', :email => parsedResults["email"], :location_id => 1)
