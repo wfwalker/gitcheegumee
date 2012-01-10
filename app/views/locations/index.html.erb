@@ -5,7 +5,7 @@
   <tr>
     <td valign="top"><%= link_to location.title, edit_location_path(location) %></td>
     <td valign="top" style="padding-bottom: 20px;" ><%=h location.description %></td>
-    <td valign="top" ><% if location.exits.count == 0 %>NO EXITS <% end %></td>
+    <td valign="top" ><% if location.exits.count == 0 %><del>exits</del><% end %> <% if location.entrances.count == 0 %><del>entrances</del><% end %></td>
     <td valign="top"><%= link_to 'Destroy', location, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
