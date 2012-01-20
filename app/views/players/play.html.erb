@@ -45,7 +45,7 @@
 
 <script>
 function alertMsg() {
-	$.getJSON('/locations/show_players/<%= @player.location_id %>.json', function(data) {
+	$.getJSON('/locations/show_recently_updated_players/<%= @player.location_id %>.json', function(data) {
 		$('#playerList').empty();
 		for (var key in data) {
 			var player = data[key]['player'];
