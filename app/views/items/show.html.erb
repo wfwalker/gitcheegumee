@@ -18,6 +18,17 @@
   <%=h @item.player_id %>
 </p>
 
+<p>
+  <b>Created:</b>
+  <%= @item.created_at %>
+</p>
+
+<p>
+  <b>Updated:</b>
+  <%= @item.updated_at %>
+</p>
+
+
 
 <%= link_to 'Edit', edit_item_path(@item) %> |
 <%= link_to 'Back', items_path %>
