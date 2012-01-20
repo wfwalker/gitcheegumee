@@ -140,6 +140,13 @@ class ApplicationController < ActionController::Base
 			    logger.error("VC: Logging in as " + @player.email)
 			    flash[:notice] = 'Welcome back, ' + @player.email
 			    populate_session(@player)
+
+			    happening = Happening.new()
+			    happening.player_id = @player.id
+			    happening.location_id = @player.location_id
+			    happening.description = "%s logged in" % [@player.name]
+			    happening.save
+
 			    redirect_to url_for(:controller => 'players', :action => 'play', :id => @player) 
 			else
 				flash[:error] = 'Welcome, please register'
