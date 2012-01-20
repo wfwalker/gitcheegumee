@@ -78,7 +78,7 @@ class PlayersController < ApplicationController
       happening.player_id = @player.id
       happening.location_id = @player.location_id
       happening.item_id = @item.id
-      happening.description = "%s took %s" % [@player.name, @item.description]
+      happening.description = "%s took a %s" % [@player.name, @item.name]
       happening.save
     else
       raise "Illegal take, player %d in location %d cannot pick up %d" % [@player.id, @player.location.id, @item.id]
@@ -100,7 +100,7 @@ class PlayersController < ApplicationController
       happening.player_id = @player.id
       happening.location_id = @player.location_id
       happening.item_id = @item.id
-      happening.description = "%s dropped %s" % [@player.name, @item.description]
+      happening.description = "%s dropped a %s" % [@player.name, @item.name]
       happening.save
     else
       raise "Illegal take, player %d in location %d cannot drop %d" % [@player.id, @player.location.id, @item.id]
