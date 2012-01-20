@@ -27,12 +27,12 @@ class LocationsController < ApplicationController
     end
   end
 
-  def show_players
+  def show_recently_updated_players
     @location = Location.find(params[:id])
 
     respond_to do |format|
-      format.xml  { render :xml => @location.players }
-      format.json  { render :json => @location.players }
+      format.xml  { render :xml => @location.players.recently_updated }
+      format.json  { render :json => @location.players.recently_updated }
     end
   end
 
