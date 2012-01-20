@@ -69,7 +69,7 @@ function alertMsg() {
 		//http://localhost:3000/players/take/1?item_id=1
 		for (var key in data) {
 			var item = data[key]['item'];
-			$('#itemList').append('<div><a href=/players/take/<%= @player.id %>?item_id=' + item['id'] + '>' + item['description'] + '</a> is here.</div>');
+			$('#itemList').append('<div>A <a href=/players/take/<%= @player.id %>?item_id=' + item['id'] + '>' + item['name'] + '</a> is here.</div>');
 		};
   	});
 	var t = setTimeout("alertMsg()",3000);
