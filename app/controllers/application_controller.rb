@@ -51,6 +51,8 @@ class ApplicationController < ActionController::Base
 		    # active session, update the timer
 		    logger.error("VC: Actively logged in, setting activity timer")
 		    session[:login_time] = Time.now.to_i
+			sessionPlayer = Player.find_by_id(session[:player_id])
+			sessionPlayer.touch
 		  end
 		else
 		  logger.error("VC: Not logged in, no timeout check")
