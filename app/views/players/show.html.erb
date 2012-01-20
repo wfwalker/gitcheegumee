@@ -15,6 +15,23 @@
   <%=h @player.location_id %>
 </p>
 
+<p>
+  <b>Created:</b>
+  <%= @player.created_at %>
+</p>
+
+<p>
+  <b>Updated:</b>
+  <%= @player.updated_at %>
+</p>
+
+<b>Happenings:</b>
+<div id="happeninglist" style="height: 200px; width: 800px; border: solid 1px gray; overflow: auto">
+<% for happening in @player.happenings do %>
+	<div><%= happening.created_at %>: <%= happening.description %></div>
+<% end %>
+</div>
+
 
 <%= link_to 'Edit', edit_player_path(@player) %> |
 <%= link_to 'Back', players_path %>
