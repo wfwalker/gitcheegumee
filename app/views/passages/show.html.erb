@@ -1,4 +1,11 @@
 <p>
+  <b>From:</b>
+  <%= link_to @passage.source.title, location_url(@passage.source) %>
+  <b>To:</b>
+  <%= link_to @passage.destination.title, location_url(@passage.destination) %>
+</p>
+
+<p>
   <b>Title:</b>
   <%=h @passage.title %>
 </p>
@@ -6,16 +13,6 @@
 <p>
   <b>Description:</b>
   <%=h @passage.description %>
-</p>
-
-<p>
-  <b>Source:</b>
-  <%= link_to @passage.source.title, location_url(@passage.source) %>
-</p>
-
-<p>
-  <b>Destination:</b>
-  <%=h @passage.destination_id %>
 </p>
 
 
