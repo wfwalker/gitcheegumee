@@ -17,9 +17,11 @@
 
   <p>
     <b>Connected Rooms:</b>
+    <ul>
     <% for exit in @location.exits do %>
-      <div><%= link_to exit.title, edit_passage_url(exit) %> ==> <%= link_to exit.destination.title, edit_location_url(exit.destination_id) %></div>
+      <li>exit <%= link_to exit.title, edit_passage_url(exit) %> to <%= link_to exit.destination.title, edit_location_url(exit.destination_id) %></li>
     <% end %>
+    </ul>
     <%= link_to 'Add Passage', url_for(:controller => 'passages', :action => 'new', 'passage[source_id]' => @location) %>
     </p>  
   <p>
