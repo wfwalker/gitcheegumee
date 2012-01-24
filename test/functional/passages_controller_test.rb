@@ -21,7 +21,7 @@ class PassagesControllerTest < ActionController::TestCase
   end
 
   test "should show passage" do
-    get :show, :id => passages(:one).to_param
+    get :show, {:id => passages(:one).to_param}, logged_in_one()
     assert_response :success
   end
 

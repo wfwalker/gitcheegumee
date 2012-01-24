@@ -1,7 +1,7 @@
 class LocationsController < ApplicationController
 
-  before_filter :verify_admin_credentials, :only => [:new, :show, :create, :edit, :index, :update, :destroy]  
-  before_filter :verify_and_update_activity_timer, :except => [:new, :show, :create, :edit, :index, :update, :destroy]  
+  before_filter :verify_admin_credentials, :except => [:show_recent_happenings, :show_recently_updated_players, :show_items]
+  before_filter :verify_and_update_activity_timer  
 
   # GET /locations
   # GET /locations.xml
