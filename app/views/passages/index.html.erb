@@ -2,16 +2,16 @@
 
 <table>
   <tr>
-    <th>Source</th>
     <th>Title</th>
+    <th>Source</th>
     <th>Destination</th>
   </tr>
 
 <% @passages.each do |passage| %>
   <tr>
-    <td><%= link_to passage.source.title, location_url(passage.source) %></td>
     <td><%= link_to passage.title, edit_passage_path(passage) %></td>
-    <td><%= link_to passage.destination.title, location_url(passage.destination) %></td>
+    <td>from <%= link_to passage.destination.title, location_url(passage.destination) %></td>
+    <td>to <%= link_to passage.source.title, location_url(passage.source) %></td>
     <td><%= link_to 'Destroy', passage, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>

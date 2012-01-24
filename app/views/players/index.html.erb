@@ -1,4 +1,4 @@
-<h1>Listing players</h1>
+<h1>Players</h1>
 
 <table>
   <tr>
@@ -9,10 +9,9 @@
 
 <% @players.each do |player| %>
   <tr>
-    <td><%=h player.name %></td>
+    <td><%= link_to player.name, player %></td>
     <td><%=h player.email %></td>
     <td><%=h player.location.title %></td>
-    <td><%= link_to 'Show', player %></td>
     <td><%= link_to 'Edit', edit_player_path(player) %></td>
     <td><%= link_to 'Destroy', player, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
