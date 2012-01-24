@@ -13,11 +13,11 @@
   </p>
   <p>
     <%= f.label :location_id %><br />
-    <%= f.text_field :location_id %>
+    <%= f.collection_select :location_id, Location.find(:all, :order => 'title'), :id, :title, {:include_blank => 'None'} %>
   </p>
   <p>
     <%= f.label :player_id %><br />
-    <%= f.text_field :player_id %>
+    <%= f.collection_select :player_id, Player.find(:all, :order => 'name'), :id, :name, {:include_blank => 'None'} %>
   </p>
   <p>
     <%= f.submit 'Update' %>
