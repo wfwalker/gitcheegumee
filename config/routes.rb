@@ -2,7 +2,6 @@ ActionController::Routing::Routes.draw do |map|
   # wfw root URL
   map.connect '', :controller => 'application', :action => 'index'
 
-
   map.resources :happenings
 
   map.resources :items
@@ -11,7 +10,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :passages
 
-  map.resources :locations
+  map.resources :locations, :collection => { :generate_graph => :get, :serve_graph => :get }
 
   # The priority is based upon order of creation: first created -> highest priority.
 

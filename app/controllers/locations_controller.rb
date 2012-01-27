@@ -1,7 +1,12 @@
+require 'rubygems'
+require 'graphviz'  # this loads the ruby-graphviz gem
+
 class LocationsController < ApplicationController
 
   before_filter :verify_admin_credentials, :except => [:show_recent_happenings, :show_recently_updated_players, :show_items]
   before_filter :verify_and_update_activity_timer  
+
+  TMP_GRAPHVIZ_IMAGE_PATH = Rails.root.join('tmp/locations.png')
 
   # GET /locations
   # GET /locations.xml
@@ -114,6 +119,30 @@ class LocationsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(locations_url) }
       format.xml  { head :ok }
+    end
+  end
+
+  def serve_graph()
+    send_file TMP_GRAPHVIZ_IMAGE_PATH
+  end
+
+  def generate_graph()
+    # initialize new Graphviz graph
+    g = GraphViz.new( :G, :type => :digraph )
+
+    nodes = {}
+    for location in Location.find(:all)
+      nodes[location.id] = g.add_node(location.title)
+    end
+
+    for passage in Passage.find(:all)
+      g.add_edge(nodes[passage.source_id], nodes[passage.destination_id])
+    end
+
+    g.output( :png => TMP_GRAPHVIZ_IMAGE_PATH )
+
+    respond_to do |format|
+      format.json { render :json => {:path => 'locations/serve_graph'} }
     end
   end
 end

@@ -1,5 +1,9 @@
 <h1>Listing locations</h1>
 
+<div id="graph">
+	<%= Time.now %>
+</div>
+
 <table>
 <% @locations.each do |location| %>
   <tr>
@@ -14,3 +18,11 @@
 <br />
 
 <%= link_to 'New location', new_location_path %>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$.getJSON('/locations/generate_graph.json', function(data) {
+		$("#graph").append("<img src='/locations/serve_graph' />");
+	});
+});
+</script>
