@@ -1,5 +1,5 @@
-require 'rubygems'
-require 'graphviz'  # this loads the ruby-graphviz gem
+# require 'rubygems'
+# require 'graphviz'  # this loads the ruby-graphviz gem
 
 class LocationsController < ApplicationController
 
@@ -122,27 +122,27 @@ class LocationsController < ApplicationController
     end
   end
 
-  def serve_graph()
-    send_file TMP_GRAPHVIZ_IMAGE_PATH
-  end
+  # def serve_graph()
+  #   send_file TMP_GRAPHVIZ_IMAGE_PATH
+  # end
 
-  def generate_graph()
-    # initialize new Graphviz graph
-    g = GraphViz.new( :G, :type => :digraph )
+  # def generate_graph()
+  #   # initialize new Graphviz graph
+  #   g = GraphViz.new( :G, :type => :digraph )
 
-    nodes = {}
-    for location in Location.find(:all)
-      nodes[location.id] = g.add_node(location.title)
-    end
+  #   nodes = {}
+  #   for location in Location.find(:all)
+  #     nodes[location.id] = g.add_node(location.title)
+  #   end
 
-    for passage in Passage.find(:all)
-      g.add_edge(nodes[passage.source_id], nodes[passage.destination_id])
-    end
+  #   for passage in Passage.find(:all)
+  #     g.add_edge(nodes[passage.source_id], nodes[passage.destination_id])
+  #   end
 
-    g.output( :png => TMP_GRAPHVIZ_IMAGE_PATH )
+  #   g.output( :png => TMP_GRAPHVIZ_IMAGE_PATH )
 
-    respond_to do |format|
-      format.json { render :json => {:path => 'locations/serve_graph'} }
-    end
-  end
+  #   respond_to do |format|
+  #     format.json { render :json => {:path => 'locations/serve_graph'} }
+  #   end
+  # end
 end
