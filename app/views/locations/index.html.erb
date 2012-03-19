@@ -1,28 +1,25 @@
 <h1>Listing locations</h1>
 
-<div id="graph">
-	<%= Time.now %>
-</div>
-
 <table>
 <% @locations.each do |location| %>
   <tr>
     <td valign="top"><%= link_to location.title, edit_location_path(location) %></td>
     <td valign="top" style="padding-bottom: 20px;" ><%=h location.description %></td>
-    <td valign="top" ><% if location.exits.count == 0 %><del>exits</del><% end %> <% if location.entrances.count == 0 %><del>entrances</del><% end %></td>
-    <td valign="top"><%= link_to 'Destroy', location, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td valign="top" >
+    	<div style="color: red">
+    		<% if location.exits.count == 0 %><del>exits</del><% end %>
+    		<% if location.entrances.count == 0 %><del>entrances</del><% end %>
+    	</div>
+    </td>
+    <td valign="top">
+    	<%= link_to 'delete', location, :confirm => 'Are you sure?', :method => :delete %>
+    </td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New location', new_location_path %>
+<div><%= link_to 'New location', new_location_path %></div>
 
-<script type="text/javascript">
-$(document).ready(function() {
-	// $.getJSON('/locations/generate_graph.json', function(data) {
-	// 	$("#graph").append("<img src='/locations/serve_graph' />");
-	// });
-});
-</script>
+<div><%= link_to 'Download graphiz file', :controller => 'locations', :action => 'index', :format => 'dot' %></div>
