@@ -4,4 +4,4 @@
 # Mime::Type.register "text/richtext", :rtf
 # Mime::Type.register_alias "text/html", :iphone
 
-Mime::Type.register "text/plain", :dot
+Mime::Type.register "text/x-graphviz", :dot
