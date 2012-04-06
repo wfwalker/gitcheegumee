@@ -7,9 +7,12 @@ class ApplicationController < ActionController::Base
 	protect_from_forgery # See ActionController::RequestForgeryProtection for details
 	layout "standard"
 
+	# show the front page; doesn't require anything from the database
 	def index
 	end
 
+	# for development purposes allow overriding of the default session timeout from
+	# an environment variable
 	def inactivity_timeout
 		if (ENV['inactivity_timeout'] != nil)
 		  ENV['inactivity_timeout'].to_i
@@ -18,6 +21,8 @@ class ApplicationController < ActionController::Base
 		end
 	end         
   
+  	# returns true if the session contains a player.id which matches the email address in the session
+  	# returns false otherwise
 	def has_valid_credentials
 		if session[:player_id] == nil
 			return false
@@ -27,6 +32,8 @@ class ApplicationController < ActionController::Base
 		end
 	end
 
+	# returns true if the session contains a player.id which matches the email address in the session AND that player is an admin
+	# returns false otherwise
 	def has_valid_admin_credentials
 		if session[:player_id] == nil
 			return false
@@ -36,6 +43,9 @@ class ApplicationController < ActionController::Base
 		end
 	end
 
+	# ensures that the session has valid credentials (i. e., user is logged in) and has been active recently
+	# if so, update that player record and the activity timer
+	# if not, clear the session and redirect to the front page
 	def verify_and_update_activity_timer
 		if (has_valid_credentials) then
 		  # username is valid, login_time is valid, do the real checking
@@ -44,7 +54,7 @@ class ApplicationController < ActionController::Base
 
 		  if (inactivity > inactivity_timeout) then
 		    # timeout! clobber the session
-		    flash[:error] = 'Editing session timed out; please login again to continue editing'
+		    flash[:error] = 'Session timed out; please login again to continue'
 		    clear_session()
  		    redirect_to :controller => 'application', :action => 'index'
 		  else
@@ -59,6 +69,9 @@ class ApplicationController < ActionController::Base
 		end
 	end
 	
+	# ensures that the session has valid credentials (i. e., user is logged in)
+	# if so, do nothing 
+	# if not, clear the session and redirect to the front page
 	def verify_credentials
 		if (has_valid_credentials) then
 		  logger.error("VC: Logged in")
@@ -70,6 +83,9 @@ class ApplicationController < ActionController::Base
 		end
 	end
 
+	# ensures that the session has valid admin credentials (i. e., user is logged in and is an administrator)
+	# if so, do nothing 
+	# if not, clear the session and redirect to the front page
 	def verify_admin_credentials
 		if (has_valid_admin_credentials) then
 		  logger.error("VC: Logged in or not administrator")
@@ -81,6 +97,7 @@ class ApplicationController < ActionController::Base
 		end
 	end
 
+	# removes from the session all the slots we use
 	def clear_session
 		session[:email] = nil    
 		session[:player_id] = nil
@@ -88,6 +105,7 @@ class ApplicationController < ActionController::Base
 		session[:login_time] = nil 
 	end
 
+	# populates the session with the slots we use based on info in the Player record
 	def populate_session(aPlayer)
 		session[:email] = @player.email
 		session[:player_id] = @player.id 
@@ -95,12 +113,20 @@ class ApplicationController < ActionController::Base
 		session[:login_time] = Time.now.to_i     
 	end
 
+	# clears the session and redirects to the front page
 	def logout
 		logger.error("VC: logging out")
 		flash[:error] = 'logging out'
 		clear_session()
 		redirect_to :controller => 'application', :action => 'index'
 	end
+
+	# if this user is already logged in, redirect to the front page
+	# if not, take the BrowserID assertion from the user agent and forward it to the BrowserID verification service
+	#      if the verification service says OK, look for an existing Player record
+	#           if an existing Player is found, populate the session from that Player and start playing
+	#           if no existing Player is found, go to the registration flow
+	# if the assertion is missing, redirect to the front page
 
 	def verify_browserid
 		if (session[:email] != nil)
@@ -136,6 +162,7 @@ class ApplicationController < ActionController::Base
 		  
 		  if parsedResults["status"] == "okay"
 		  	# we got a valid assertion; either we have an account for this guy or we send him to create a new one
+		  	# use the email field from the assertion as a key to look up the Player record
 		  	if (@player = Player.find_by_email(parsedResults["email"]))
 			    logger.error("VC: Logging in as " + @player.email)
 			    flash[:notice] = 'Welcome back, ' + @player.email
