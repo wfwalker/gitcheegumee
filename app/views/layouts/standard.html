@@ -21,11 +21,10 @@
 
 <% if (session[:player_id]) %>
   <div><%= session[:email] %></div>
-
-  <div><%= link_to "logout", :controller => 'application', :action => 'logout' %></div>
-  <div><%= link_to "play!", :controller => 'players', :action => 'play', :id => session[:player_id] %></div>
+  <div><%= link_to "logout", {:controller => 'application', :action => 'logout'}, :id => 'logoutlink' %></div>
 
   <% if (session[:admin]) %>
+    <div><%= link_to "play!", :controller => 'players', :action => 'play', :id => session[:player_id] %></div>
     <div><%= link_to "edit locations", :controller => 'locations', :action => 'index' %></div>
     <div><%= link_to "edit players", :controller => 'players', :action => 'index' %></div>
     <div><%= link_to "edit items", :controller => 'items', :action => 'index' %></div>
@@ -36,4 +35,37 @@
 </div>
 
 </body>
+
+<script type="text/javascript">
+<!--
+
+$(document).ready(function() {
+  $("a#loginlink").click(function() {
+    navigator.id.request();
+  });
+
+  $("a#logoutlink").click(function() {
+    navigator.id.logout();
+  });
+
+  navigator.id.watch({
+    onlogin: function(theBrowserIDAssertion) {
+        if (theBrowserIDAssertion) {
+            // This code will be invoked once the user has successfully
+            // selected an email address they control to sign in with.    
+
+          $('#browserIDform').append('<input type="hidden" id="assertion" name="assertion" value="' + theBrowserIDAssertion + '" />');
+          $("#browserIDform").submit();
+        } else {             
+            // something went wrong! we didn't generate an assertion, don't bother redrawing the page
+        }
+      },
+    onlogout: function() {
+      console.log("LOGGED OUT");
+    }
+  });
+});
+-->
+</script>
+
 </html>
