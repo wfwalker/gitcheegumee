@@ -1,12 +1,26 @@
 digraph "g" {
-    // look ma! Comments!
+    // Locations are Nodes
+    <% @locations.each do |location| %>
+    	node "<%= location.title %>" [ URL = "<%= location_url :id => location %>", shape=box ]
+    <% end %>
+
+    // Items are Nodes
+    <% @items.each do |item| %>
+    	node "<%= item.name %>" [ URL = "<%= item_url :id => item %>", shape=diamond, style=dotted  ]
+    <% end %>
+
+    // Passages are Edges
     <% @locations.each do |location| %>
     	<% location.exits.each do |exit| %>
-	    	"<%= location.title %>" -> "<%= exit.destination.title %>";
-    	<% end %>
-
-    	<% if location.exits.count == 0 %>
-    		"<%= location.title %>";
+	    	"<%= location.title %>" -> "<%= exit.destination.title %>" [ URL = "<%= passage_url :id => exit %>" ];
     	<% end %>
     <% end %>
+
+    // Items attach to Locations
+    <% @items.each do |item| %>
+    	<% if item.location %>
+	    	"<%= item.name %>" -> "<%= item.location.title %>" [ URL = "<%= item_url :id => item %>", style=dotted ];
+    	<% end %>
+    <% end %>
+
 }

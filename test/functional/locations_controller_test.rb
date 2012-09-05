@@ -21,7 +21,7 @@ class LocationsControllerTest < ActionController::TestCase
   end
 
   test "should show location" do
-    get :show, :id => locations(:location_one).to_param
+    get :show, {:id => locations(:location_one).to_param}, logged_in_one()
     assert_response :success
   end
 

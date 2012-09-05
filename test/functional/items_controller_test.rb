@@ -21,7 +21,7 @@ class ItemsControllerTest < ActionController::TestCase
   end
 
   test "should show item" do
-    get :show, :id => items(:one).to_param
+    get :show, {:id => items(:one).to_param}, logged_in_one()
     assert_response :success
   end
 

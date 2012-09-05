@@ -9,6 +9,7 @@ body {
 
 body, p, ol, ul {
   font-family: 'IM Fell DW Pica', Georgia;
+  text-rendering: optimizeLegibility;  
   font-size:   18pt;
 }
 

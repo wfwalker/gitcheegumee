@@ -1,6 +1,6 @@
 class PassagesController < ApplicationController
-  before_filter :verify_admin_credentials, :only => [:new, :create, :edit, :index, :update, :destroy]  
-  before_filter :verify_and_update_activity_timer, :except => [:new, :create, :edit, :index, :update, :destroy]  
+  before_filter :verify_admin_credentials  
+  before_filter :verify_and_update_activity_timer  
 
   # GET /passages
   # GET /passages.xml

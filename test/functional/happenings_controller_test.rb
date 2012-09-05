@@ -21,7 +21,7 @@ class HappeningsControllerTest < ActionController::TestCase
   end
 
   test "should show happening" do
-    get :show, :id => happenings(:one).to_param
+    get :show, {:id => happenings(:one).to_param}, logged_in_one()
     assert_response :success
   end
 

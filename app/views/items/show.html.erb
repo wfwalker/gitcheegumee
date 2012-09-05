@@ -9,13 +9,15 @@
 </p>
 
 <p>
-  <b>Location:</b>
-  <%=h @item.location_id %>
-</p>
-
-<p>
-  <b>Player:</b>
-  <%=h @item.player_id %>
+  <% if @item.location %>
+    <b>At location:</b>
+    <%= link_to @item.location.title, @item.location %>
+  <% elsif @item.player %>
+    <b>Carried by:</b>
+    <%= link_to @item.player.name, @item.player %>
+  <% else %>
+    <b>Inaccessible: Neither carried nor at a location!</b>
+  <% end %>
 </p>
 
 <p>
@@ -27,6 +29,13 @@
   <b>Updated:</b>
   <%= @item.updated_at %>
 </p>
+
+<b>Sample usage:</b>
+<ul>
+  <li><i>You took a <%=h @item.name %></i></li>
+  <li><i>You dropped a <%=h @item.name %></i></li>
+  <li><i>You carry <%=h @item.description %></i></li>
+</ul>
 
 
 

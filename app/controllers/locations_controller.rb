@@ -1,12 +1,16 @@
+# require 'rubygems'
+# require 'graphviz'  # this loads the ruby-graphviz gem
+
 class LocationsController < ApplicationController
 
-  before_filter :verify_admin_credentials, :only => [:new, :create, :edit, :index, :update, :destroy]  
-  before_filter :verify_and_update_activity_timer, :except => [:new, :create, :edit, :index, :update, :destroy]  
+  before_filter :verify_admin_credentials, :except => [:show_recent_happenings, :show_recently_updated_players, :show_items]
+  before_filter :verify_and_update_activity_timer  
 
   # GET /locations
   # GET /locations.xml
   def index
     @locations = Location.all
+    @items = Item.all
 
     respond_to do |format|
       format.html # index.html.erb

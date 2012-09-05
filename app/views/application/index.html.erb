@@ -6,8 +6,10 @@
 	In a World that mashes hand-knit Zeppelins, Block Party Politics, Sky Pirates, the Hypermodern League, and Banjo-Playing Saboteurs.
 </div>
 
+<img src="/images/aerodromes.png" width="600px" />
+
 <% if (! session[:player_id]) %>
-<div style='padding: 30px 0px 30px 0px'><a href="#" id="loginlink"><img src="https://browserid.org/i/sign_in_green.png" alt="sign in" /></a></div>
+<div style='padding: 30px 0px 30px 0px'>Please <a href="#" id="loginlink"><img src="https://browserid.org/i/sign_in_green.png" alt="sign in" /></a> to play.</div>
 <% end %>
 
 <% form_tag('/application/verify_browserid', :method => 'POST', :id => 'browserIDform') do %>
@@ -16,5 +18,4 @@
 <img src="/images/organ-drawing.JPG" width="400px"/>
 
 <img src="/images/aerodromes.png" width="800px" />
-  </body>
-</html>
+
