@@ -21,7 +21,7 @@
 
 <% if (session[:player_id]) %>
   <div><%= session[:email] %></div>
-  <div><%= link_to "logout", {:controller => 'application', :action => 'logout'}, :id => 'logoutlink' %></div>
+  <div><a href="#" id="logoutlink">logout</a></div>
 
   <% if (session[:admin]) %>
     <div><%= link_to "play!", :controller => 'players', :action => 'play', :id => session[:player_id] %></div>
@@ -40,6 +40,13 @@
 <!--
 
 $(document).ready(function() {
+
+  var sessionLoggedInEmail = null;
+
+<% if (session[:player_id]) %>
+  sessionLoggedInEmail = '<%= session[:email] %>';
+<% end %>
+
   $("a#loginlink").click(function() {
     navigator.id.request();
   });
@@ -48,7 +55,9 @@ $(document).ready(function() {
     navigator.id.logout();
   });
 
+  console.log("sessionLoggedInEmail " + sessionLoggedInEmail);
   navigator.id.watch({
+    loggedInEmail: sessionLoggedInEmail,
     onlogin: function(theBrowserIDAssertion) {
         if (theBrowserIDAssertion) {
             // This code will be invoked once the user has successfully
@@ -61,7 +70,14 @@ $(document).ready(function() {
         }
       },
     onlogout: function() {
-      console.log("LOGGED OUT");
+      console.log("onlogout");
+      sessionLoggedInEmail = null;
+      $.ajax({
+        type: 'GET',
+        url: '/application/logout', // This is a URL on your website.
+        success: function(res, status, xhr) { console.log("reloading"); window.location.reload(); },
+        error: function(res, status, xhr) { alert("logout failure" + res); }
+      });    
     }
   });
 });

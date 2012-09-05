@@ -118,7 +118,7 @@ class ApplicationController < ActionController::Base
 		logger.error("VC: logging out")
 		flash[:error] = 'logging out'
 		clear_session()
-		redirect_to :controller => 'application', :action => 'index'
+		render :nothing => true
 	end
 
 	# if this user is already logged in, redirect to the front page
